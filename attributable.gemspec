@@ -18,5 +18,19 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 3.2.13"
   # s.add_dependency "jquery-rails"
 
-  s.add_development_dependency "pg"
+  s.add_development_dependency 'factory_girl'
+  s.add_development_dependency 'rspec-rails'
+
+  if (RUBY_PLATFORM.eql?('java'))
+    s.add_development_dependency 'activerecord-jdbcsqlite3-adapter'
+  else
+    s.add_development_dependency "pg"
+  end
+
+  s.add_development_dependency "capybara"
+  s.add_development_dependency 'launchy'
+  s.add_development_dependency "database_cleaner"
+  s.add_development_dependency "email_spec"
+  s.add_development_dependency "factory_girl_rails"
+  s.add_development_dependency "guard-rspec"
 end
