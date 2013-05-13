@@ -11,6 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20130509201705) do
+
+  create_table "attributable_activities", :force => true do |t|
+    t.string   "action"
+    t.string   "notes"
+    t.integer  "user_id"
+    t.integer  "trackable_id"
+    t.hstore   "change_hash"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "attributable_activities", ["trackable_id"], :name => "index_attributable_activities_on_trackable_id"
+  add_index "attributable_activities", ["user_id"], :name => "index_attributable_activities_on_user_id"
 
 end

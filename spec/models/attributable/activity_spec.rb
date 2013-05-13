@@ -10,4 +10,8 @@ describe Attributable::Activity do
     @activity.action = "create"
     @activity.should have(0).errors_on(:action)
   end
+
+  it "should not require a notes" do
+    @activity.should have(0).errors_on(:notes)
+  end
 end
