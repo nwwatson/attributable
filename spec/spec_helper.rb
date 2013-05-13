@@ -41,10 +41,43 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   
   config.before(:suite) do
+    ActiveRecord::Schema.define(:version => 1) do
+      create_table :example_model do |t|
+        t.string :title
+        t.integer :dealership_id
+        t.datetime :a_date
+        t.text :long_text_field
+      end
+    end
+
+    ActiveRecord::Schema.define(:version => 2) do
+      create_table :user do |t|
+        t.string :email
+        t.string :username
+      end
+    end
+
+    class ExampleModel < ActiveRecord::Base
+
+    end
+
+    class User < ActiveRecord::Base
+
+    end
+
     DatabaseCleaner.strategy = :truncation
   end
+
+  config.after(:suite) do
+    ActiveRecord::Base.connection.drop_table(:example_model)
+    ActiveRecord::Base.connection.drop_table(:user)
+  end
+
   config.before(:each) do
+    
+
     DatabaseCleaner.start
+
   end
   config.after(:each) do
     DatabaseCleaner.clean
