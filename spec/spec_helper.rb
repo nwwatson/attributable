@@ -42,40 +42,39 @@ RSpec.configure do |config|
   
   config.before(:suite) do
     ActiveRecord::Schema.define(:version => 1) do
-      create_table :example_model do |t|
+      create_table :example_models do |t|
         t.string :title
-        t.integer :dealership_id
+        t.integer :an_integer
         t.datetime :a_date
         t.text :long_text_field
       end
     end
 
     ActiveRecord::Schema.define(:version => 2) do
-      create_table :user do |t|
+      create_table :users do |t|
         t.string :email
         t.string :username
       end
-    end
-
-    class ExampleModel < ActiveRecord::Base
-
     end
 
     class User < ActiveRecord::Base
 
     end
 
+    class ExampleModel < ActiveRecord::Base
+
+    end
+
+
     DatabaseCleaner.strategy = :truncation
   end
 
   config.after(:suite) do
-    ActiveRecord::Base.connection.drop_table(:example_model)
-    ActiveRecord::Base.connection.drop_table(:user)
+    ActiveRecord::Base.connection.drop_table(:example_models)
+    ActiveRecord::Base.connection.drop_table(:users)
   end
 
   config.before(:each) do
-    
-
     DatabaseCleaner.start
 
   end
