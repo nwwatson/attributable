@@ -17,13 +17,21 @@ ActiveRecord::Schema.define(:version => 20130509201705) do
     t.string   "action"
     t.string   "notes"
     t.integer  "user_id"
+    t.integer  "ownable_id"
+    t.string   "ownable_type"
     t.integer  "trackable_id"
+    t.string   "trackable_type"
     t.hstore   "change_hash"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
+  add_index "attributable_activities", ["action"], :name => "index_attributable_activities_on_action"
+  add_index "attributable_activities", ["change_hash"], :name => "change_hash_idx"
+  add_index "attributable_activities", ["ownable_id"], :name => "index_attributable_activities_on_ownable_id"
+  add_index "attributable_activities", ["ownable_type"], :name => "index_attributable_activities_on_ownable_type"
   add_index "attributable_activities", ["trackable_id"], :name => "index_attributable_activities_on_trackable_id"
+  add_index "attributable_activities", ["trackable_type"], :name => "index_attributable_activities_on_trackable_type"
   add_index "attributable_activities", ["user_id"], :name => "index_attributable_activities_on_user_id"
 
 end
