@@ -7,22 +7,30 @@ require "attributable/version"
 Gem::Specification.new do |s|
   s.name        = "attributable"
   s.version     = Attributable::VERSION
-  s.authors     = ["Nicholas W. Watson"]
-  s.email       = ["nick@entropi.co"]
-  s.homepage    = "https://github.com/entropillc/attributable"
+  s.authors     = ["TODO: Your name"]
+  s.email       = ["TODO: Your email"]
+  s.homepage    = "TODO"
   s.summary     = "TODO: Summary of Attributable."
   s.description = "TODO: Description of Attributable."
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
-  s.add_dependency "rails", "~> 3.2.12"
+  s.add_dependency "rails", "~> 3.2.13"
+  s.add_dependency "activerecord-postgres-hstore"
 
-  s.add_development_dependency "activerecord-jdbcsqlite3-adapter"
-  s.add_development_dependency "rb-fsevent", "~> 0.9.3"
-  s.add_development_dependency "rspec-rails", "~> 2.13.0"
-  s.add_development_dependency "factory_girl_rails", "~> 4.2.1"
-  s.add_development_dependency "capybara", "~> 2.1.0"
-  s.add_development_dependency "database_cleaner", "~> 0.9.1"
-  s.add_development_dependency "guard-rspec", "~> 2.5.3"
-  
+  s.add_development_dependency 'factory_girl'
+  s.add_development_dependency 'rspec-rails'
+
+  if (RUBY_PLATFORM.eql?('java'))
+    s.add_development_dependency 'activerecord-jdbcsqlite3-adapter'
+  else
+    s.add_development_dependency "pg"
+  end
+
+  s.add_development_dependency "capybara"
+  s.add_development_dependency 'launchy'
+  s.add_development_dependency "database_cleaner"
+  s.add_development_dependency "email_spec"
+  s.add_development_dependency "factory_girl_rails"
+  s.add_development_dependency "guard-rspec"
 end

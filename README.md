@@ -1,18 +1,16 @@
 # Attributable
 
-Attributable is a Ruby on Rails plugin that allows you to track activities and notes for ActiveRecord models within your database
+Attributable tracks changes made on an ActiveRecord model made by a
+user. Attributable requires a PostgreSQL database that supports hstore
+fields.
 
 ## Installation
 
-Add the following line to your Gemfile
+To install Attributable, you need to ensure ensure that the database
+that you are working with has the hstore extension installed. You must use PostgreSQL to utilize this plugin.
 
-    gem 'attributable', github: 'entropillc/attributable'
+```SQL
+CREATE EXTENSION IF NOT EXISTS hstore
+```
 
-Run the installer
-
-    rails g attributable:install
-
-# Usage
-
-Attributable contains a model called Activity which stores data attributable to a model with the database. Attributable also add
-a method to the application controller called attribute_activity to the application controller. 
+If you are developing and testing this plugin and are running the rspec tests, you will need to ensure that the test database has hstore installed also.
