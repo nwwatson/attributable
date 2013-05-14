@@ -2,8 +2,10 @@ module Attributable
   class Engine < ::Rails::Engine
     isolate_namespace Attributable
 
-    config.generators do |g|
-      g.test_framework :rspec, :view_specs => false
+    def self.activate
+      ActionController::Base.send :include, Attributable::AttributableHelper
     end
+
+    config.to_prepare &method(:activate).to_proc
   end
 end
