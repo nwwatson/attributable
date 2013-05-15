@@ -1,9 +1,11 @@
+require 'rails'
+
 module Attributable
   class Engine < ::Rails::Engine
-    isolate_namespace Attributable
+    #isolate_namespace Attributable
 
     def self.activate
-      ActionController::Base.send :include, Attributable::AttributableHelper
+      ActionController::Base.send :include, Attributable::ControllerHelper
     end
 
     config.to_prepare &method(:activate).to_proc
