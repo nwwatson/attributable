@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec-rails'
 
   if (RUBY_PLATFORM.eql?('java'))
-    s.add_development_dependency 'activerecord-jdbcsqlite3-adapter'
+    s.add_development_dependency 'activerecord-jdbcpostgresql-adapter'
   else
     s.add_development_dependency "pg"
   end

@@ -63,14 +63,14 @@ module Attributable
       # Sets change_hash to the attributes that were changed
       # during the last save of the model
       def update_change_hash(obj)
-        self.change_hash = obj.previous_changes
+        self.change_hash = serialize(:some_array, Array) obj.previous_changes
       end
 
       # This method is used before validation. If the record
       # doesn't have an owning model assigned, then the trackable
       # model becomes the owning model
       def assign_ownable
-        if self.ownable.nil?
+        if self.ownable.nil? 
           association(:ownable).writer(self.trackable)
         end
       end
