@@ -15,7 +15,7 @@ module Attributable
       # of an activity for an accountable object. It is required
       # to pass in an action and user. The note is optional
       def add_activity(action, user, note=nil)
-        activities << Attributable::Activity({ action: action, trackable: self, user: user, note: note })
+        activities << Attributable::Activity({ action: action, trackable: self, user: user, notes: note })
       end
     end
 

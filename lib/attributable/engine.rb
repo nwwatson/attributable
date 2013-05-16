@@ -2,7 +2,7 @@ require 'rails'
 
 module Attributable
   class Engine < ::Rails::Engine
-    #isolate_namespace Attributable
+    isolate_namespace Attributable
 
     def self.activate
       ActionController::Base.send :include, Attributable::ControllerHelper
