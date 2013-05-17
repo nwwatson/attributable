@@ -15,11 +15,9 @@ module Attributable
     # phone_number is the trackable model
     belongs_to :ownable, polymorphic: true
 
-
     validates :action, presence: true
     validates :user, presence: true
     validates :trackable, presence: true
-    validates :change_hash, presence: true
     validates :ownable, presence: true
 
     # If there isn't an owning model, then the value is set to
@@ -63,7 +61,7 @@ module Attributable
       # Sets change_hash to the attributes that were changed
       # during the last save of the model
       def update_change_hash(obj)
-        self.change_hash = serialize(:some_array, Array) obj.previous_changes
+        self.change_hash = obj.previous_changes
       end
 
       # This method is used before validation. If the record
