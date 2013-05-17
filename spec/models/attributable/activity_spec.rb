@@ -36,12 +36,6 @@ describe Attributable::Activity do
     @activity.should have(0).errors_on(:ownable)
   end
 
-  it "should require a change_hash" do
-    @activity.should have(1).errors_on(:change_hash)
-    @activity.change_hash = { this: "that", that: "this" }
-    @activity.should have(0).errors_on(:change_hash)
-  end
-
   it "should track changes for a newly created model" do
     example_model = create(:example_model)
     user = create(:user)
