@@ -23,7 +23,7 @@ module Attributable
     #  attribute_change_for_model('create!', blog_entry, comment) # without comment
     #  attribute_change_for_model('create!', blog_entry, comment, 'Created comment') # with comment
     #  
-    def attribute_change_for_model(action, ownable, trackable, notes)
+    def attribute_change_for_model(action, ownable, trackable, notes=nil)
       Attributable::Activity.create!({ action: action, ownable: ownable, trackable: trackable, user: current_user, notes: notes })
     end
 
@@ -45,7 +45,7 @@ module Attributable
     #  attribute_change_for_model_by_user('create!', blog_entry, comment) # without comment
     #  attribute_change_for_model_by_user('create!', blog_entry, comment, 'Created comment') # with comment
     #  
-    def attribute_change_for_model_by_user(action, ownable, trackable, user, notes)
+    def attribute_change_for_model_by_user(action, ownable, trackable, user, notes=nil)
       Attributable::Activity.create!({ action: action, ownable: ownable, trackable: trackable, user: user, notes: notes })
     end
 
