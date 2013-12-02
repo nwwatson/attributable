@@ -8,7 +8,7 @@ module Attributable
       # Method returns all activities for trackable
       # in chronological order
       def activities_chronologically
-        activities.in_order
+        activities.includes(:user).in_order
       end
 
       # Convience method that allows for the quick addition
@@ -20,7 +20,7 @@ module Attributable
 
       # Finds the last activity for the object
       def last_activity
-        activities.order("created_at DESC").last
+        activities.order("created_at DESC").last.includes(:user)
       end
     end
 
