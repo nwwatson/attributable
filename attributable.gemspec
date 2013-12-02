@@ -7,11 +7,11 @@ require "attributable/version"
 Gem::Specification.new do |s|
   s.name        = "attributable"
   s.version     = Attributable::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Attributable."
-  s.description = "TODO: Description of Attributable."
+  s.authors     = ["Nicholas W. Watson"]
+  s.email       = ["nick@entropi.co"]
+  s.homepage    = "https://github.com/entropillc/attributable"
+  s.summary     = "Helps track changes to ActiveRecord models"
+  s.description = "Helps track changes to ActiveRecord models by creating activities and storing changes in a PostgreSQL hstore field"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
 
