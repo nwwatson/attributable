@@ -22,6 +22,11 @@ module Attributable
       def last_activity
         activities.order("created_at DESC").last.includes(:user)
       end
+
+      def last_update
+        updates = activities.where(action: "update").order("created_at DESC").limit(1)
+        updates.empty? ? nil : updates.first
+      end
     end
 
     # Method returns the class name so that we can use it
