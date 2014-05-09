@@ -20,7 +20,7 @@ module Attributable
 
       # Finds the last activity for the object
       def last_activity
-        activities.order("created_at DESC").last.includes(:user)
+        activities.order("created_at DESC").first #ordered by desc, so first, not last.
       end
 
       def last_update
