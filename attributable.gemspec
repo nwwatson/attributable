@@ -8,29 +8,22 @@ Gem::Specification.new do |s|
   s.name        = "attributable"
   s.version     = Attributable::VERSION
   s.authors     = ["Nicholas W. Watson"]
-  s.email       = ["nick@entropi.co"]
-  s.homepage    = "https://github.com/entropillc/attributable"
+  s.email       = ["nwwatson@gmail.com"]
+  s.homepage    = "https://github.com/nwwatson/attributable"
   s.summary     = "Helps track changes to ActiveRecord models"
   s.description = "Helps track changes to ActiveRecord models by creating activities and storing changes in a PostgreSQL hstore field"
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
+  s.license     = "MIT"
 
-  s.add_dependency "rails", "~> 3.2.13"
-  s.add_dependency "activerecord-postgres-hstore"
+  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  s.test_files = Dir["test/**/*"]
 
-  s.add_development_dependency 'factory_girl'
-  s.add_development_dependency 'rspec-rails'
+  s.add_dependency "rails", "~> 4.2.0"
+  s.add_dependency "pg"
 
-  if (RUBY_PLATFORM.eql?('java'))
-    s.add_development_dependency 'activerecord-jdbcpostgresql-adapter'
-  else
-    s.add_development_dependency "pg"
-  end
-
-  s.add_development_dependency "capybara"
-  s.add_development_dependency 'launchy'
-  s.add_development_dependency "database_cleaner"
-  s.add_development_dependency "email_spec"
-  s.add_development_dependency "factory_girl_rails"
-  s.add_development_dependency "guard-rspec"
+  s.add_development_dependency 'rspec-rails', '~> 3.2.0'
+  s.add_development_dependency 'rspec-its', '~> 1.1.0'
+  s.add_development_dependency 'shoulda-matchers', '~> 2.8.0'
+  s.add_development_dependency 'database_cleaner', '~> 1.4.0'
+  s.add_development_dependency 'guard-rspec', '~> 4.5.0'
 end

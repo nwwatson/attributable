@@ -1,9 +1,5 @@
 module Attributable
   class Activity < ActiveRecord::Base
-    serialize :change_hash, ActiveRecord::Coders::Hstore
-
-    attr_accessible :action, :change_hash, :notes, :user, :trackable, :ownable
-
     belongs_to :user
     # The trackable model is the model that you want to track changes to
 
@@ -25,8 +21,8 @@ module Attributable
     before_validation :assign_ownable
 
     # Scopes
-    scope :in_order, order('created_at ASC')
-    scope :latest, order('created_at DESC')
+    scope :in_order, -> { order('created_at ASC') }
+    scope :latest, -> { order('created_at DESC') }
 
     # Override the all method so that the default scope
     # is in reverse chronological order
@@ -43,13 +39,13 @@ module Attributable
 
     class << self
 
-      # Method to look up activities assigned 
+      # Method to look up activities assigned
       # to all accountable types for a given user
       def self.find_activities_by_user(user)
         where(user_id: user.id).latest
       end
 
-      # Method to look up all notes for 
+      # Method to look up all notes for
       # a notable class name and notable id
       def self.find_activities_for_attributable(attributable_str, attributable_id)
         where(attributable_type: attributable_str, attributable_id: attributable_id)
@@ -68,7 +64,7 @@ module Attributable
       # doesn't have an owning model assigned, then the trackable
       # model becomes the owning model
       def assign_ownable
-        if self.ownable.nil? 
+        if self.ownable.nil?
           association(:ownable).writer(self.trackable)
         end
       end

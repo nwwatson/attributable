@@ -7,7 +7,7 @@ development:
   adapter: postgresql
   encoding: unicode
   database: attributable_development
-  username: 
+  username:
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -32,12 +32,12 @@ test:
   adapter: postgresql
   encoding: unicode
   database: attributable_test
-  username: 
+  username:
   password:
 
 production:
   adapter: postgresql
   encoding: unicode
-  database: dummy_production
-  username: dummy
+  database: attributable_production
+  username: 
   password:

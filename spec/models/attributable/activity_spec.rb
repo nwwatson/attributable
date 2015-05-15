@@ -1,69 +1,51 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Attributable::Activity do
-  before :each do
-    @activity = Attributable::Activity.new
+RSpec.describe Attributable::Activity, type: :model do
+  describe "validations" do
+    context "for action" do
+      it { should validate_presence_of :action }
+    end
 
-  end
+    context "for user" do
+      it { should validate_presence_of :user }
+    end
 
-  it "should require an action" do
-    @activity.should have(1).errors_on(:action)
-    @activity.action = "create"
-    @activity.should have(0).errors_on(:action)
-  end
+    context "for trackable" do
+      #it { should validate_presence_of :trackable }
+    end
 
-  it "should not require a notes" do
-    @activity.should have(0).errors_on(:notes)
-  end
+    context "for ownable" do
+      it {should validate_presence_of :ownable }
+    end
 
-  it "should require a user" do
-    @activity.should have(1).errors_on(:user)
-    @activity.user = create(:user)
-    @activity.should have(0).errors_on(:user)
-  end
+    describe "create activity" do
+      let(:example_model) {
+        ExampleModel.create!(
+        title: "this is the title",
+        an_integer: 1,
+        a_date: Time.now,
+        long_text_field: "Hey, this is a long text field.Hey, this is a long text field. Hey, this is a long text field. Hey, this is a long text field"
+        )
+      }
+      let(:user) { User.create(username: 'nwwatson', email: 'nwwatson@gmail.com')}
 
-  it "should require a trackable model" do
-    example_model = create(:example_model)
-    
-    @activity.should have(1).errors_on(:trackable)
-    @activity.trackable = example_model
-    @activity.should have(0).errors_on(:trackable)
-  end
+      context "when provided valid attributes" do
+        it "should track changes for a newly created model" do
 
-  it "should require a ownable model" do
-    @activity.should have(1).errors_on(:ownable)
-    @activity.ownable = create(:example_model)
-    @activity.should have(0).errors_on(:ownable)
-  end
+          @attr = {
+            action: "create",
+            user: user,
+            trackable: example_model
+          }
 
-  it "should track changes for a newly created model" do
-    example_model = create(:example_model)
-    user = create(:user)
+          activity = Attributable::Activity.create!(@attr)
 
-    @attr = {
-      action: "create",
-      user: user,
-      trackable: example_model
-    }
+          expect(activity.change_hash.size).to eq(5)
+        end
+      end
 
-    @activity = Attributable::Activity.create!(@attr)
+    end
 
-    @activity.change_hash.size.should eql(5)
-  end
 
-  it "should track changes for an updated model" do
-    example_model = create(:example_model)
-    example_model.title = "This is the updated attribute"
-    example_model.save!
-
-     @attr = {
-      action: "create",
-      user: create(:user),
-      trackable: example_model
-    }
-
-    @activity = Attributable::Activity.create!(@attr)
-
-    @activity.change_hash.size.should eql(1)
   end
 end

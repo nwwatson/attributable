@@ -7,8 +7,7 @@ class CreateAttributableActivities < ActiveRecord::Migration
       t.references :ownable, polymorphic: true
       t.references :trackable, polymorphic: true
       t.hstore :change_hash
-
-      t.timestamps
+      t.timestamps null: false
     end
 
     add_index :attributable_activities, :action
